@@ -1,0 +1,172 @@
+<html>
+<head>
+    <title>Where knowledge begins</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 100px;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #252525;
+            border-radius: 22px;
+            padding: 10px 20px;
+        }
+        .search-box input {
+            border: none;
+            background-color: transparent;
+            color: #fff;
+            margin-right: 10px;
+            font-size: 16px;
+            flex-grow: 1;
+        }
+        .search-box input:focus {
+            outline: none;
+        }
+        .search-box .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .search-box .btn:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .search-box .fas {
+            color: #fff;
+        }
+        .title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 50px;
+        }
+        .answer-card {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .accordion {
+            --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFFFFF'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFFFFF'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        #loader {
+            display: none;
+        }
+        pre{
+            white-space: pre-wrap;
+        }
+
+        #rawdata {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Where knowledge begins</div>
+        <div class="search-box">
+            <input id="query" type="text" placeholder="Ask anything...">
+            <button class="btn" onclick="showAnswer()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div id="loader" class="text-center mt-5">
+            <div class="justify-content-center">
+                <div class="spinner-border text-secondary" role="status" style="width: 10rem; height: 10rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h4 class="text-blue mt-5">Generating...</h4>
+            </div>
+       </div>
+        <div id="answer" class="mt-5" style="display: none;">
+
+            <!-- The answer will be displayed here -->
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Raw Trace
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                      <div class="accordion-body" id="rawdata">
+                        
+                      </div>
+                    </div>
+                </div>            
+            </div>
+            <div class="answer-card">
+                <pre id="result"></pre>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/111a58e221.js" crossorigin="anonymous"></script>
+    <script>
+        async function showAnswer() {
+            var query = document.getElementById('query').value;
+            try {
+                if (query.length > 0)
+                {
+                    console.log(query);
+                    const formData = new FormData();
+                    formData.append('query', query);
+                    document.getElementById('loader').style.display = 'block';
+                    document.getElementById('answer').style.display = 'none';
+                    const response = await fetch('/process_query', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('answer').style.display = 'block';
+                    console.log("data raw_data:", data.raw_data); // Add this line to check the content
+                    const decodedRawData = atob(data.raw_data);
+                    console.log("decodedRawData:", decodedRawData); // Add this line to check the content
+                    const rawdataElement = document.getElementById('rawdata');
+
+                    // Clear the existing content (if any) and display the new data
+                    rawdataElement.innerHTML = `<pre>${JSON.stringify(decodedRawData, null, 2)}</pre>`;
+
+                    // const decodedRawData = JSON.parse(atob(data.raw_data));
+                    // document.getElementById('rawdata').innerHTML = JSON.stringify(decodedRawData, null, 2);
+
+                    // // document.getElementById('rawdata').innerHTML = data.raw_data;
+                    document.getElementById('result').innerHTML = `<b>Result:</b> ${data.desired_output} <br><br><b>URL:</b> ${data.url}`;
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Please ask a question...',
+                        confirmButtonColor: "#1C2F47"
+                    })
+                }
+                
+            } catch (error) {
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Error:'+error,
+                        confirmButtonColor: "#1C2F47"
+                })
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
