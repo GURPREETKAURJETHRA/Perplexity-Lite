@@ -7,7 +7,7 @@ Build Your Own Perplexity Lite Using LangGraph, GPT-4, and Tavily AI
 By combining these powerful tools, I’ve successfully created an application similar to Perplexity AI. This application excels at unlocking knowledge through information discovery and sharing.
 
 ## Key Features:
-- ** Real-time Chat**: Engage in dynamic conversations with other users.
+- **Real-time Chat**: Engage in dynamic conversations with other users.
 - **Multi-Actor Architecture**: Understand how LangGraph manages actors and their interactions.
 - **GPT-4 Integration**: Leverage GPT-4 for natural language understanding and generation.
 - ** Tavily AI Insights**: Explore rapid insights and comprehensive research capabilities.
@@ -20,3 +20,19 @@ By combining these powerful tools, I’ve successfully created an application si
 -  Application development with advanced AI technologies: By combining these tools, I've managed to create an application similar to Perplexity AI, known for its ability to unlock knowledge through information discovery and sharing.
 
  ## Installation and Usage:
+
+
+ ## Implementation Guide:
+[Link ▶️](https://www.youtube.com/watch?v=O0fpDUwxUEg)
+
+ ---
+## ©️ License 🪪 
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+#### **If you like this LLM Project do drop ⭐ to this repo**
+#### Follow me on [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gurpreetkaurjethra/) &nbsp; [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/GURPREETKAURJETHRA/)
+
+---
