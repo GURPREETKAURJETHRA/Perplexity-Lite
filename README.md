@@ -10,7 +10,7 @@ By combining these powerful tools, I’ve successfully created an application si
 - **Real-time Chat**: Engage in dynamic conversations with other users.
 - **Multi-Actor Architecture**: Understand how LangGraph manages actors and their interactions.
 - **GPT-4 Integration**: Leverage GPT-4 for natural language understanding and generation.
-- ** Tavily AI Insights**: Explore rapid insights and comprehensive research capabilities.
+- **Tavily AI Insights**: Explore rapid insights and comprehensive research capabilities.
 
   
 ## Requirements:
@@ -18,9 +18,6 @@ By combining these powerful tools, I’ve successfully created an application si
 -  **Tavily AI**, an incredible tool for rapid insights and comprehensive research. Tavily AI streamlines the research process, from source gathering to organizing results, making it an invaluable asset for developers.
 -  **GPT-4**, a large language model that's pivotal in the development of advanced AI applications.
 -  Application development with advanced AI technologies: By combining these tools, I've managed to create an application similar to Perplexity AI, known for its ability to unlock knowledge through information discovery and sharing.
-
- ## Installation and Usage:
-
 
  ## Implementation Guide:
 [Link ▶️](https://www.youtube.com/watch?v=O0fpDUwxUEg)
